@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+import Options from "./components/Options";
+import withVideo from "./components/WithVideo";
+import { useSelector } from "react-redux";
 
 function App() {
+  const { video } = useSelector((state) => state.video)
+  const { h1Text } = useSelector((state) => state.video)
+  const VideoMain = withVideo(video, h1Text)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper>
+      <div className="video">
+        <VideoMain />
+      </div>
+      <div className="options">
+        <Options />
+      </div>
+    </Wrapper>
   );
 }
 
+const Wrapper = styled.div`
+    display:flex ;
+    .video{
+      flex:0.5 ;
+    }
+    .options{
+      flex:0.5;
+    }
+`
 export default App;
